@@ -21,7 +21,7 @@ const createUser = async (req, res) => {
     }
 
    
-    const saltRounds = 10;
+    const saltRounds = 12;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
     
@@ -110,7 +110,19 @@ const editUser = async (req, res) => {
     }
 };
 
-
+const deleteUser = async (req, res) => {
+  try{
+    const {id} = req.params;
+    const user = await User.findByIdAndDelete(id);
+    if (!user){
+      console.log(user);
+      return res.status(404).json({error:"user not found"})
+    }
+    res.status(200).json({message:"user has been deleted", user})
+  }catch (error){
+    res.status(500).json({error:error.message})
+  }
+}
 
 const forgotPassword = async (req, res) => {
     try {
@@ -132,4 +144,4 @@ const forgotPassword = async (req, res) => {
 };
 
 
-module.exports = {createUser, loginUser, editUser, forgotPassword};
+module.exports = {createUser, loginUser, editUser,deleteUser, forgotPassword};
