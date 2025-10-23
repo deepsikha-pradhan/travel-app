@@ -8,12 +8,12 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   phone_number: { type: String, required: true },
   user_type: { type: String, required: true },
-   password: { type: String, required: true },
-  basic_details: { type: mongoose.Schema.Types.Mixed }, 
-  vehicle_id: { type: mongoose.Schema.Types.ObjectId }, 
- 
-}, 
-{ timestamps: true });
+  password: { type: String, required: true },
+  basic_details: { type: mongoose.Schema.Types.Mixed },
+  vehicle_id: { type: mongoose.Schema.Types.ObjectId },
+  otp: { type: Number }
+},
+  { timestamps: true });
 
 userSchema.methods.comparePassword = async function (candidatePassword) {
   return await bcrypt.compare(candidatePassword, this.password);
