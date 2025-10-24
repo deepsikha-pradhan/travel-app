@@ -2,8 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const path = require("path");
+const passport = require("passport");
 const userRoutes = require ( './routes/userRoutes')
 const vehicleRoutes = require('./routes/vehicleRoutes')
+const googleRoutes = require('./routes/googleRoutes')
 const {connectToDatabase} = require ('./config/db')
 
 dotenv.config();
@@ -19,6 +21,9 @@ app.use(express.json());
 //   next();
 // });
 
+require("./config/passport")(passport);
+app.use(passport.initialize())
+
 
 app.get("/health-check", (req, res) => {
   res.send("travel app server is running...");
@@ -26,7 +31,8 @@ app.get("/health-check", (req, res) => {
 
 // Mount user routes
 app.use('/api', userRoutes, );
-app.use('/api', vehicleRoutes)
+app.use('/api', vehicleRoutes);
+app.use("/api/auth", googleRoutes);
 
 connectToDatabase();
 

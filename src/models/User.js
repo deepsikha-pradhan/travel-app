@@ -11,7 +11,8 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   basic_details: { type: mongoose.Schema.Types.Mixed },
   vehicle_id: { type: mongoose.Schema.Types.ObjectId },
-  otp: { type: Number }
+  otp: { type: Number },
+  googleId:{type: String}
 },
   { timestamps: true });
 

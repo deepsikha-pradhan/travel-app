@@ -130,24 +130,7 @@ const deleteUser = async (req, res) => {
   }
 }
 
-// const forgotPassword = async (req, res) => {
-//     try {
-//         const { email } = req.body;
-//         const user = await User.findOne({ email });
-//         if (!user) {
-//             return res.status(404).json({ error: 'User not found' });
-//         }
-//         const resetToken = jwt.sign(
-//             { id: user._id, email: user.email },
-//             process.env.JWT_RESET_SECRET,
-//             { expiresIn: '3h' }
-//         );
-        
-//         res.status(200).json({ message: 'Reset token generated', token: resetToken });
-//     } catch (err) {
-//         res.status(500).json({ error: err.message });
-//     }
-// };
+
 
 
 const forgotPassword = async (req, res) => {
