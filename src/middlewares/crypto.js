@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-
+require("dotenv").config();
 
 const SECRET_KEY = process.env.JWT_SECRET || "default_secret_key";
 
@@ -9,11 +9,12 @@ const generateToken = (data, options = { expiresIn: "24h" }) => {
 
 const verifyToken = (token) => {
   try {
-    const decoded = jwt.verify(token, SECRET_KEY);
+    const decoded =  jwt.verify(token.split(" ")[1], SECRET_KEY);
     return decoded;
   } catch (error) {
     console.log("error occured", error);
-    return null;
+    // return null;
+    throw error;
   }
 };
 

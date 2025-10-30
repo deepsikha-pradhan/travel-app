@@ -1,5 +1,5 @@
 const express= require('express')
-
+const colors = require('colors');
 const crypto = require("./crypto")
 const jwt = require('jsonwebtoken');
 
@@ -24,10 +24,12 @@ const validatePayload = ({rule})=>{
 async function verifyUserToken(req, res, next){
     try{
         const token = req.headers.authorization;
-        if(!token){
+
+         if(!token){
             return res.status(401).json({message:"Token is missing"})
         }
         const decoded = crypto.verifyToken(token)
+        console.log(decoded);
         req.user= decoded;
         next();
         }catch(error){

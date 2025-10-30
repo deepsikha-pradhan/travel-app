@@ -6,6 +6,8 @@ const passport = require("passport");
 const userRoutes = require ( './routes/userRoutes')
 const vehicleRoutes = require('./routes/vehicleRoutes')
 const googleRoutes = require('./routes/googleRoutes')
+const passengerTripRoutes = require('./routes/tripRoutes/passengerTripRoutes')
+const bookingRoutes = require ('./routes/bookingRoutes/passengerBookingRoute')
 const {connectToDatabase} = require ('./config/db')
 
 dotenv.config();
@@ -32,6 +34,8 @@ app.get("/health-check", (req, res) => {
 // Mount user routes
 app.use('/api', userRoutes, );
 app.use('/api', vehicleRoutes);
+app.use('/api/trips/passenger', passengerTripRoutes);
+app.use('/api/travel',bookingRoutes);
 app.use("/api/auth", googleRoutes);
 
 connectToDatabase();
